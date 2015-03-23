@@ -1,50 +1,33 @@
 #!/usr/bin/env node
 
-var http = require("http"),
-    choices = ["rock","paper","scissors","lizard","spock"],
-    server;
+var express = require("express"),
+    http = require("http"),
+    game = require("./game.js"),
+    app = express();
 
-// 0 - rock , 1 - paper, 2 - scissors, 3 - lizard, 4 - spock
-var outcomes = 
-[["tie", "lose", "win", "win", "lose"],
-["win", "tie", "lose", "lose", "win"],
-["lose", "win", "tie", "win", "lose"],
-["lose", "win", "lose", "tie", "win"],
-["win", "lose", "win", "lose", "tie"]];
+//Create Express server
+http.createServer(app).listen(3000);
 
-var wins = 0,
-    losses = 0,
-    ties = 0;
+//Setup static file sharing
+app.use(express.static(__dirname + "/client"));
 
-var game = function(choice){
-    var won = false,
-        opp = getRandomInt(0,4),
-        outcome;
+app.get("/outcome.json", function(req,res){
+    res.json(game);
+});
 
-    outcome = outcomes[choices.indexOf(choice)][opp];
-
-    switch (outcome){
-        case "win":
-            wins++;
-            break;
-        case "tie":
-            ties++;
-            break;
-        case "lose":
-            losses++;
-            break;
-    }
-
-    console.log(choice+" vs "+choices[opp]+", You "+outcome+"!");
-    return ({outcome: outcome, wins: wins, losses: losses, ties: ties});
-}
-
-// Function acquired from MDN at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-function getRandomInt(min, max){
-    return Math.floor(Math.random() * (max - min) + min);
-}
+app.get("/play/rock", function(req,res){
+    console.log("Player picked rock");
+});
 
 
+/*
+    //route template
+    app.get("", function(req,res){
+
+    });
+*/
+
+/*
 server = http.createServer(function (req,res){
     res.writeHead(200, {"Content-Type": "app/json"});
 
@@ -64,5 +47,6 @@ server = http.createServer(function (req,res){
 });
 
 server.listen(3000);
+*/
 
-console.log("Server listening on http://localhost/3000");
+console.log("Server listening on http://localhost:3000");
