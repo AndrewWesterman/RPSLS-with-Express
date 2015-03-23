@@ -1,16 +1,31 @@
 var main = function (){
     "use strict";
 
-    $(".rock").on("click", function(){
-        $.post("play/rock",function(res){
+    $("button").on("click", function(){
+        var choice = $(this).attr("class");
+        $.post("play/"+choice,function(res){
             postOutcome(res);
+        });
+
+        $.post("tally", function(res){
+            updateTally(res);
         });
     });
 
     var postOutcome = function(game){
-        console.log("Attempting to post outcome");
-        $("#outcomes").append($("<p>").text(game.gametext));
+        $("#outcomes").prepend($("<p>").text(game.gametext));
     };
+
+    var updateTally = function(tally){
+        $("#wins").text(tally.wins);
+        $("#losses").text(tally.losses);
+        $("#ties").text(tally.ties);
+    };
+
+    //Initial post of the tally so data is not lost on refresh
+    $.post("tally", function(res){
+        updateTally(res);
+    });
 };
 
 $(document).ready(main);

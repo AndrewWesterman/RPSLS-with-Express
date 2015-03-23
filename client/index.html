@@ -2,6 +2,7 @@
 
 <head>
     <title>RPSLS - Express</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
 </head>
 <body>
     <h1>Rock, Paper, Scissors, Lizard, Spock!</h1>
@@ -12,7 +13,18 @@
         <button class="lizard">Lizard</button>
         <button class="spock">Spock</button>        
     </div>
-    <p id="outcomes">Outcomes:</p>
+
+    <div class="outcome">
+        <h2>Outcomes:</h2>
+        <div id="outcomes"></div>
+    </div>
+    
+    <div class="tally">
+        <h2>Tally</h2>
+        <p>Wins: <span id="wins"></span></p>
+        <p>Losses: <span id="losses"></span></p>
+        <p>Ties: <span id="ties"></span></p>
+    </div>
 
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
     <script src="javascripts/app.js"></script>

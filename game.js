@@ -33,7 +33,12 @@ var game = function(choice){
     }
 
     latestOutcome = choice+" vs "+choices[opp]+", You "+outcome+"!";
-    return ({outcome: outcome, wins: wins, losses: losses, ties: ties});
+    return ({
+                outcome: outcome, 
+                wins: wins, losses: 
+                losses, 
+                ties: ties
+            });
 };
 
 var getLatest = function(){

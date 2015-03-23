@@ -1,0 +1,8 @@
+.outcome{
+    float: left;
+}
+
+.tally{
+    float: right;
+    padding-right: 200px;
+}
