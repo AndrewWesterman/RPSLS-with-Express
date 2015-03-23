@@ -36,10 +36,13 @@ var game = function(choice){
     return ({outcome: outcome, wins: wins, losses: losses, ties: ties});
 };
 
+var getLatest = function(){
+    return {gametext: latestOutcome};
+};
+
 // Function acquired from MDN at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 function getRandomInt(min, max){
     return Math.floor(Math.random() * (max - min) + min);
 }
 
-module.exports = game;
-//module.exports = latestOutcome;
+module.exports = {play: game, getLatest: getLatest};

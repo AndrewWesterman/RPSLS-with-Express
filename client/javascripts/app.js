@@ -2,20 +2,15 @@ var main = function (){
     "use strict";
 
     $(".rock").on("click", function(){
-        $.post("play/rock",{}, function(){
-            console.log("We picked rock");
+        $.post("play/rock",function(res){
+            postOutcome(res);
         });
     });
 
-    var postOutcome = function(outcome){
-        $("#outcomes").append($("<p>").text(outcome));
+    var postOutcome = function(game){
+        console.log("Attempting to post outcome");
+        $("#outcomes").append($("<p>").text(game.gametext));
     };
-
-    setInterval(function(){
-        $.getJSON("/game.json",postOutcome);
-    },500);
-
-    $.getJSON("/game.json",postOutcome);
 };
 
 $(document).ready(main);

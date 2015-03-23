@@ -3,6 +3,7 @@
 var express = require("express"),
     http = require("http"),
     game = require("./game.js"),
+    latestGame,
     app = express();
 
 //Create Express server
@@ -15,8 +16,10 @@ app.get("/outcome.json", function(req,res){
     res.json(game);
 });
 
-app.get("/play/rock", function(req,res){
+app.post("/play/rock", function(req,res){
     console.log("Player picked rock");
+    latestGame = game.play("rock");
+    res.json(game.getLatest());
 });
 
 
